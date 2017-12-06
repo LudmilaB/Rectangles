@@ -41,15 +41,15 @@
 			 
 					 if (shapes[i].clr===shapes[j].clr)// delete shapes if they are the same color
 					 {
-					    DrawRectangle(shapes[i]);
-						DrawRectangle(shapes[j]);
-                        swooshSound.play();						
+//					    DrawRectangle(shapes[i]);
+//						DrawRectangle(shapes[j]);						
 						shapes.splice(i,1);
 						if(i<j)
 						  shapes.splice(j-1,1);
 					    else
 						  shapes.splice(j,1);
 						redraw();
+                                                swooshSound.play();
 						return;
 					 }
 					 else
@@ -74,8 +74,8 @@
 	 function StartRectangle(event){
 	   if(!Start)
 	      return;
-	   swooshSound.play(); //without that doesn't work on mobile
-	   swooshSound.stop();//
+//	   swooshSound.play(); //without that doesn't work on mobile
+//	   swooshSound.stop();//
 	   var rect = canvas.getBoundingClientRect();
        var x=(event.clientX-rect.left)/(rect.right-rect.left)*canvas.width;
        var y= (event.clientY-rect.top)/(rect.bottom-rect.top)*canvas.height;
@@ -83,8 +83,6 @@
 	   if ((i=PointInsideRectangles(x,y)) !=-1)   // regraw old rectangle
 	   {
 			shapes[i].growing=true;
-	//		swooshSound.play(); //without that doesn't work on mobile
-	 //       swooshSound.stop();//
 			interv=setInterval(draw, 1000/30);
 			return;
 	   }
@@ -105,7 +103,6 @@
 			   messageContainer = document.querySelector(".game-message");
 			   messageContainer.classList.add("game-over");
 			   messageContainer.getElementsByTagName("p")[0].textContent ="Game over!";
-			   ShareScore();
 			}			
 		    return;
 	    }
@@ -126,8 +123,8 @@
 		 window.localStorage.setItem("best-rects", best);
 		}
 		if (newlevel>level){
+                        newLevelSound.play();
 			level=newlevel;
-			newLevelSound.play();
 			messageContainer = document.querySelector(".game-message");
             messageContainer.classList.add("game-continue");
 			var txt = "Conratulations! You've reached level "+ level +" !"
